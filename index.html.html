@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>DRYBEA PREMIUM FOODS | Luxury Seafood</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fefcf7;
+      color: #1e2a2b;
+      scroll-behavior: smooth;
+    }
+
+    /* luxury color scheme: gold, green, black, white */
+    :root {
+      --gold: #c6a43f;
+      --gold-light: #e6c96e;
+      --dark-green: #1f4f3a;
+      --charcoal: #1e1e1e;
+      --cream: #fffcf5;
+      --shadow-sm: 0 10px 30px -10px rgba(0,0,0,0.05);
+      --shadow-md: 0 20px 35px -12px rgba(0,0,0,0.08);
+    }
+
+    /* global */
+    a { text-decoration: none; color: inherit; }
+    button, .btn { cursor: pointer; transition: all 0.2s ease; }
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 70px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+
+    /* header + navigation */
+    .navbar {
+      background: white;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(2px);
+      background: rgba(255,255,245,0.96);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      flex-wrap: wrap;
+    }
+    .logo img { height: 48px; object-fit: contain; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .nav-links li a {
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      color: #2c3e2f;
+      transition: 0.2s;
+    }
+    .nav-links li a:hover, .nav-links li a.active-page { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 4px; }
+    .lang-switch { display: flex; gap: 10px; }
+    .lang-btn { background: transparent; border: 1px solid var(--gold); padding: 6px 12px; border-radius: 40px; font-size: 0.75rem; font-weight: 600; color: #1e2a2b; }
+    .lang-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+    .mobile-menu { display: none; font-size: 1.8rem; background: none; border: none; }
+
+    /* page container */
+    .page { display: none; animation: fadeIn 0.4s ease; }
+    .page.active-page { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* hero, cards, luxury */
+    .hero {
+      background: linear-gradient(107deg, #d8e3d6 0%, #f5f0e3 100%);
+      border-radius: 2rem;
+      padding: 50px 40px;
+      margin: 30px 0 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hero-content h1 { font-size: 3rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #1f4f3a; }
+    .gold-text { color: var(--gold); }
+    .btn-primary { background: var(--dark-green); color: white; padding: 14px 32px; border-radius: 50px; font-weight: 600; display: inline-block; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .btn-primary:hover { background: #11382a; transform: translateY(-2px); }
+    .btn-outline { border: 1.5px solid var(--gold); background: transparent; padding: 10px 24px; border-radius: 40px; font-weight: 500; }
+
+    /* product grid */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 30px; margin-top: 30px; }
+    .product-card {
+      background: white; border-radius: 28px; overflow: hidden; transition: 0.25s; box-shadow: var(--shadow-sm);
+      border: 1px solid #f0e7da;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .product-img { height: 210px; width: 100%; object-fit: cover; background: #f4efe7; }
+    .product-info { padding: 18px 16px 20px; }
+    .product-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 6px; }
+    .product-desc { font-size: 0.8rem; color: #5a5a5a; margin: 8px 0; }
+    .rating { color: var(--gold); letter-spacing: 2px; font-size: 0.8rem; margin: 6px 0; }
+    .daraz-btn { background: #1e2a2b; color: white; width: 100%; margin-top: 12px; padding: 8px; border-radius: 40px; font-weight: 500; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+    .daraz-btn:hover { background: var(--gold); color: black; }
+
+    /* filters */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 30px; align-items: center; }
+    .filter-btn { background: #efebe4; border: none; padding: 8px 20px; border-radius: 40px; font-weight: 500; }
+    .filter-btn.active-filter { background: var(--dark-green); color: white; }
+    #searchInput { padding: 10px 20px; border-radius: 40px; border: 1px solid #ddd; flex: 1; min-width: 200px; }
+
+    /* Chatbot */
+    .chatbot-float {
+      position: fixed; bottom: 25px; right: 25px; z-index: 1200;
+    }
+    .chat-icon {
+      background: var(--dark-green); width: 60px; height: 60px; border-radius: 60px; display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 28px; box-shadow: 0 6px 16px rgba(0,0,0,0.2); cursor: pointer;
+    }
+    .chat-window {
+      position: fixed; bottom: 100px; right: 25px; width: 340px; background: white; border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; z-index: 1201;
+      border: 1px solid #e9dacb;
+    }
+    .chat-header { background: var(--dark-green); color: white; padding: 12px 16px; font-weight: 600; }
+    .chat-messages { height: 280px; overflow-y: auto; padding: 12px; background: #fcf9f2; }
+    .chat-input-area { display: flex; border-top: 1px solid #eee; }
+    .chat-input-area input { flex: 1; border: none; padding: 12px; outline: none; }
+    .chat-input-area button { background: var(--gold); border: none; padding: 0 16px; cursor: pointer; }
+
+    /* video gallery grid */
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-top: 30px; }
+    .video-card iframe { width: 100%; border-radius: 20px; aspect-ratio: 16/9; }
+
+    /* whatsapp float */
+    .wa-float {
+      position: fixed; bottom: 25px; left: 25px; background: #25D366; color: white; width: 55px; height: 55px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1100; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    footer { background: #1c2c28; color: #ccc; padding: 40px 0; text-align: center; margin-top: 30px; }
+
+    @media (max-width: 850px) {
+      .nav-links { display: none; width: 100%; flex-direction: column; background: white; padding: 20px; gap: 18px; }
+      .nav-links.show { display: flex; }
+      .mobile-menu { display: block; }
+      .hero h1 { font-size: 2rem; }
+      .container { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating WhatsApp & Chatbot -->
+<a href="https://wa.me/94711171172" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+<div class="chatbot-float">
+  <div class="chat-icon" id="chatToggle"><i class="fas fa-comment-dots"></i></div>
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">🤖 DRYBEA AI Assistant</div>
+    <div class="chat-messages" id="chatMessages"><div>✨ Hi! Ask me about products, orders, or recipes!</div></div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Ask something...">
+      <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- Main App -->
+<div class="navbar">
+  <div class="nav-container">
+    <div class="logo"><img src="https://www.image2url.com/r2/default/images/1778422008013-43d25a30-c287-4443-b9a3-a49a8509f145.png" alt="DRYBEA"></div>
+    <button class="mobile-menu" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" data-page="home">Home</a></li>
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="products">Products</a></li>
+      <li><a href="#" data-page="recipes">Recipe</a></li>
+      <li><a href="#" data-page="video">Video Gallery</a></li>
+      <li><a href="#" data-page="darazshop">Daraz Shop</a></li>
+      <li><a href="#" data-page="blog">Blog</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+    </ul>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="si">සිං</button>
+      <button class="lang-btn" data-lang="ta">தமிழ்</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="pageContainer">
+  <!-- HOME Page -->
+  <div id="home" class="page active-page">
+    <div class="hero">
+      <div class="hero-content">
+        <h1 data-i18n="hero_title">Premium Ocean Flavors <span class="gold-text">Since Generations</span></h1>
+        <p data-i18n="hero_sub" style="font-size:1.2rem; margin:15px 0;">Easy Shopping for Healthy Life</p>
+        <a href="https://www.daraz.lk/shop/drybea-market-" target="_blank" class="btn-primary">🛒 Shop Now on Daraz.lk</a>
+        <div style="margin-top:20px;"><a href="tel:+94762432963" style="font-weight:500;"><i class="fas fa-phone-alt"></i> +94 76 243 2963</a></div>
+      </div>
+      <div style="width:100%; max-width:400px;">
+        <div style="height: 0; padding-bottom: 56.25%; position:relative;"><iframe allow="autoplay; gyroscope;" allowfullscreen src="https://www.kapwing.com/e/6a00a4ab61a4d9cd2b304dc1" style="border:0; height:100%; left:0; position:absolute; top:0; width:100%; border-radius: 28px;"></iframe></div>
+      </div>
+    </div>
+    <section><h2 data-i18n="featured_head" class="section-title">✨ Featured Products</h2><div id="featuredGrid" class="product-grid"></div></section>
+    <section><h2 data-i18n="testimonial_head">❤️ Customer Love</h2><div class="testimonial-slider" style="display:flex; gap:20px; overflow-x:auto; padding:20px 0;"><div style="background:white; border-radius:28px; padding:24px; min-width:280px;"><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><p>"Best Maldive fish chips! authentic taste"</p><strong>- Shani, Colombo</strong></div><div style="background:white; border-radius:28px; padding:24px; min-width:280px;"><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star-half-alt gold-text"></i><p>"Premium packaging & freshness, love the Jadi"</p><strong>- Nimal, Galle</strong></div><div style="background:white; border-radius:28px; padding:24px; min-width:280px;"><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><i class="fas fa-star gold-text"></i><p>"Drybea brought tradional taste back"</p><strong>- Amara, Kandy</strong></div></div></section>
+  </div>
+
+  <!-- ABOUT page -->
+  <div id="about" class="page"><div class="container"><h2 data-i18n="about_title">Our Heritage</h2><div style="display:flex; flex-wrap:wrap; gap:40px; margin-top:30px;"><div><img src="https://www.image2url.com/r2/default/images/1778426892823-453e0229-e50f-48bf-a12c-184faafd26cc.png" style="border-radius:32px; width:100%; max-width:450px;"></div><div><p data-i18n="about_text1">DRYBEA MARKET brings the finest Sri Lankan dried fish, Maldive chips, and artisanal seafood condiments. Rooted in Tangalle's coastal heritage, we combine traditional sun-drying techniques with modern hygiene. Sustainably sourced, non-GMO, and rich in protein. Our mission: deliver ocean luxury to every family.</p><p data-i18n="about_text2" style="margin-top:20px;">ISO-certified practices, premium vaccum packs, and a commitment to 100% natural ingredients. Taste the tradition.</p><div class="btn-outline" style="margin-top:20px;">🌿 Sustainable & Ethical</div></div></div></div></div>
+
+  <!-- PRODUCTS page -->
+  <div id="products" class="page"><div class="container"><h2 data-i18n="products_main">Our Premium Collection</h2><div class="filter-bar"><input type="text" id="searchInput" placeholder="🔍 Search product..." data-i18n-placeholder="search_placeholder"><div id="categoryFilters"></div></div><div id="productsGrid" class="product-grid"></div></div></div>
+
+  <!-- RECIPES page -->
+  <div id="recipes" class="page"><div class="container"><h2>🍳 Exquisite Seafood Recipes</h2><div class="product-grid" id="recipeGrid"></div></div></div>
+
+  <!-- VIDEO GALLERY -->
+  <div id="video" class="page"><div class="container"><h2>🎬 Culinary Cinema</h2><div class="video-grid"><div class="video-card"><iframe src="https://www.youtube.com/embed/NNqWw4x5hEE" title="Dry Fish Curry" frameborder="0" allowfullscreen></iframe><p>Traditional Dried Fish Curry</p></div><div class="video-card"><iframe src="https://www.youtube.com/embed/0ULsqH94PhY" title="Maldive Fish Sambol" frameborder="0" allowfullscreen></iframe><p>Authentic Umbalakada Sambol</p></div><div class="video-card"><iframe src="https://www.youtube.com/embed/SJ3YH0fLjqY" title="Seafood Platter" frameborder="0" allowfullscreen></iframe><p>Premium Seafood Platter</p></div><div class="video-card"><iframe src="https://www.youtube.com/embed/9ZyANVsADUw" title="Behind the scenes" frameborder="0" allowfullscreen></iframe><p>Sun Drying Process</p></div></div><div style="margin-top:20px; text-align:center;"><a href="https://www.youtube.com/@Drybeamarket" target="_blank" class="btn-primary">📺 Visit DRYBEA YouTube</a></div></div></div>
+
+  <!-- DARAZ SHOP page (product showcase) -->
+  <div id="darazshop" class="page"><div class="container"><h2>🛍️ DRYBEA on Daraz.lk</h2><p>Discover all bestsellers & exclusive bundles</p><div id="darazProductList" class="product-grid"></div><div style="text-align:center; margin-top:30px;"><a href="https://www.daraz.lk/shop/drybea-market-" target="_blank" class="btn-primary">Explore Full Daraz Store →</a></div></div></div>
+
+  <!-- BLOG page -->
+  <div id="blog" class="page"><div class="container"><h2>📖 The Seafood Journal</h2><div class="product-grid"><div class="product-card"><div class="product-info"><h3>💪 5 Benefits of Dried Fish</h3><p>High protein, Omega-3, longer shelf life, affordable nutrition, boosts immunity.</p><span style="color:var(--gold);">read more →</span></div></div><div class="product-card"><div class="product-info"><h3>🇱🇰 Sri Lankan Seafood Culture</h3><p>From Jaffna to Tangalle: centuries-old drying techniques meet modern superfoods.</p></div></div><div class="product-card"><div class="product-info"><h3>🍣 Easy Seafood Snacks at Home</h3><p>Maldive fish chips + coconut sambol: 5-min recipe for healthy cravings.</p></div></div><div class="product-card"><div class="product-info"><h3>🚢 Sustainable Fishing</h3><p>DRYBEA supports local fishermen & eco-friendly harvest.</p></div></div></div></div></div>
+
+  <!-- CONTACT page -->
+  <div id="contact" class="page"><div class="container"><h2 data-i18n="contact_title">Let’s Connect</h2><div style="display:flex; flex-wrap:wrap; gap:40px; margin:30px 0;"><div style="flex:1"><p><i class="fab fa-whatsapp" style="color:#25D366;"></i> <strong>WhatsApp:</strong> +94 71 117 1172</p><p><i class="fab fa-facebook"></i> <strong>Facebook:</strong> /DrybeaPremiumFoods</p><p><i class="fab fa-instagram"></i> <strong>Instagram:</strong> @drybea_market</p><p><i class="far fa-envelope"></i> drybeaseafood@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Tangalle, Sri Lanka</p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15858.05683956311!2d80.7856589!3d6.0236835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae6c9e2e90e5b21%3A0x9fbffd1a0d5b6bcf!2sTangalle!5e0!3m2!1sen!2slk!4v1699999999999!5m2!1sen!2slk" width="100%" height="200" style="border:0; border-radius:24px;" allowfullscreen=""></iframe></div><div style="flex:1"><form id="contactForm"><input type="text" placeholder="Your Name" class="filter-btn" style="width:100%; margin-bottom:12px; background:white;"><input type="email" placeholder="Email" class="filter-btn" style="width:100%; margin-bottom:12px;"><textarea rows="4" placeholder="Message" style="width:100%; border-radius:28px; padding:12px;"></textarea><button type="submit" class="btn-primary" style="margin-top:12px;">Send Inquiry</button></form></div></div></div></div>
+</div>
+
+<footer><div class="container"><p>© 2025 DRYBEA PREMIUM FOODS — Authentic Sri Lankan Seafood Heritage</p><div><i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i class="fab fa-tiktok"></i> <i class="fab fa-youtube"></i></div></div></footer>
+
+<script>
+  // ------------------------------------------------------------------
+  // 21 PRODUCTS from given list (full details)
+  // ------------------------------------------------------------------
+  const products = [
+    { id:1, name:"Traditional Mackerel Jadi", desc:"100+ year southern recipe, salted & sun-dried", img:"https://www.image2url.com/r2/default/images/1778419839360-a8a8579e-2553-4b65-a49c-44f69d65dea5.png", category:"Jadi", darazLink:"https://www.daraz.lk/products/i1761890476.html", rating:4.8 },
+    { id:2, name:"Premium Skipjack Tuna Jadi", desc:"Sri Lankan premium bala jadi, rich flavor", img:"https://www.image2url.com/r2/default/images/1778419936693-6e01b8e2-0e27-443d-9f9e-a3afd21bb132.png", category:"Jadi", darazLink:"https://www.daraz.lk/products/i1761535912.html", rating:4.9 },
+    { id:3, name:"Southern Sarnella Jadi", desc:"Forgotten heritage superfood", img:"https://www.image2url.com/r2/default/images/1778420004097-085b0334-5ff8-4ade-a518-eb6244a2d7bd.png", category:"Jadi", darazLink:"https://www.daraz.lk/products/i1758620158.html", rating:4.7 },
+    { id:4, name:"Kingfish Dry Fish", desc:"Natural sun-dried, high protein", img:"https://www.image2url.com/r2/default/images/1778420251521-b2684ddd-dd98-4f7f-836b-4b3c57191cfc.png", category:"DryFish", darazLink:"https://www.daraz.lk/products/i1754646075.html", rating:4.6 },
+    { id:5, name:"Yellowfin Tuna Dry Fish", desc:"Kelewalla karawala, deep sea catch", img:"https://www.image2url.com/r2/default/images/1778420323374-9ed7ccb1-671a-4bba-b2c3-45b45001a2ec.png", category:"DryFish", darazLink:"https://www.daraz.lk/products/i1754411888.html", rating:4.8 },
+    { id:6, name:"Mahi Mahi Dry Fish", desc:"Boat caught, perfect for curry", img:"https://www.image2url.com/r2/default/images/1778420414280-69a1a237-d5c5-4fdd-9bf7-64c4fdc5619b.png", category:"DryFish", darazLink:"https://www.daraz.lk/products/i1754411888.html", rating:4.7 },
+    { id:7, name:"Umbalakada Chips 50g", desc:"Spicy ready-to-eat tuna chips", img:"https://www.image2url.com/r2/default/images/1778420528263-2bf65576-a12d-4842-b778-c1e42a6bbf80.png", category:"MaldivesChips", darazLink:"https://www.daraz.lk/products/i1754628677.html", rating:4.9 },
+    { id:8, name:"Maldive Fish Chips 100g", desc:"Premium flakes for pol sambol", img:"https://www.image2url.com/r2/default/images/1778420592463-b214d261-5230-41cf-bb47-20aeed100318.png", category:"MaldivesChips", darazLink:"https://www.daraz.lk/products/i1754610948.html", rating:4.8 },
+    { id:9, name:"Maldive Fish Chips 1KG", desc:"Family pack, authentic umbalakada", img:"https://www.image2url.com/r2/default/images/1778420696611-2ec951b4-fd2a-42ff-8053-c6508c604f7e.png", category:"MaldivesChips", darazLink:"https://www.daraz.lk/products/i1754413519.html", rating:4.9 },
+    { id:10, name:"Trevally Dry Fish", desc:"Paraw karawala, no sand", img:"https://www.image2url.com/r2/default/images/1778420767446-4031038a-c6dd-4074-ab17-f497f3317ff9.png", category:"DryFish", darazLink:"https://www.daraz.lk/products/i752642275.html", rating:4.5 },
+    { id:11, name:"Sailfish Maldive Chips", desc:"Ultra premium, 100g to 1kg", img:"https://www.image2url.com/r2/default/images/1778422752705-1974ba0b-a6ac-4386-aa7c-c04ddeda79be.jpg", category:"MaldivesChips", darazLink:"https://www.daraz.lk/products/i751643116.html", rating:4.9 },
+    { id:12, name:"Malay Pickle", desc:"Authentic traditional recipe", img:"https://www.image2url.com/r2/default/images/1778422986509-784316eb-89b4-4897-aa10-69cd8b8d0720.jpeg", category:"Condiments", darazLink:"https://www.daraz.lk/products/i749668920.html", rating:4.6 },
+    { id:13, name:"Shrimp Chili Paste", desc:"Spicy seafood condiment", img:"https://www.image2url.com/r2/default/images/1778423048684-2001a204-cffe-4ceb-a4be-aec923d4ce72.png", category:"Condiments", darazLink:"https://www.daraz.lk/products/i749670887.html", rating:4.7 },
+    { id:14, name:"Seeni Sambol", desc:"Sweet onion relish with squid & Maldive", img:"https://www.image2url.com/r2/default/images/1778423117325-b9c881ac-cd88-4b34-9cf1-8f8119c0bf12.jpg", category:"Condiments", darazLink:"https://www.daraz.lk/products/i749667950.html", rating:4.8 },
+    { id:15, name:"Premium Maldive Fish Sambol", desc:"Ocean flavor umbalakada sambol", img:"https://www.image2url.com/r2/default/images/1778423469987-cdc55595-248c-4902-a1c9-9727bd388ecb.png", category:"Condiments", darazLink:"https://www.daraz.lk/products/i747829224.html", rating:4.9 },
+    { id:16, name:"Maldivian Gold Tuna Chips", desc:"Export quality 1kg", img:"https://www.image2url.com/r2/default/images/1778422807889-06a22794-74c2-4d23-b276-b8de5292fc75.jpg", category:"MaldivesChips", darazLink:"https://www.daraz.lk/products/i740296371.html", rating:4.9 },
+    { id:17, name:"No.1 Premium Maldive Chips", desc:"Balayaa chips, bestseller", img:"https://www.image2url.com/r2/default/images/1778424092030-75506a61-2f23-49f6-b97f-094a6d0e463d.jpg", category:"MaldivesChips", darazLink:"https://www.daraz.lk/products/i167823050.html", rating:5.0 },
+    { id:18, name:"Tuna Ambulthiyal", desc:"Ready to eat sour fish curry", img:"https://www.image2url.com/r2/default/images/1778424262444-7b9c8610-6c16-43df-ab1e-fbbbfa08dbee.png", category:"Condiments", darazLink:"https://www.daraz.lk/products/i277658264.html", rating:4.7 },
+    { id:19, name:"Kelewalla Boat Karawala", desc:"Yellowfin tuna dryfish vacuum pack", img:"https://www.image2url.com/r2/default/images/1778424432838-8795aa39-155b-4372-889f-361d2d0d461f.jpg", category:"DryFish", darazLink:"https://www.daraz.lk/products/i277672016.html", rating:4.8 },
+    { id:20, name:"Dry King Fish Chunks", desc:"GMO-free, low sodium", img:"https://www.image2url.com/r2/default/images/1778424646274-e5726056-91c2-47dc-8ab0-919803b6c71d.jpg", category:"DryFish", darazLink:"https://www.daraz.lk/products/i277658232.html", rating:4.6 },
+    { id:21, name:"Wanna Boat Karawala", desc:"Dried Mahi Mahi vacuum pack", img:"https://www.image2url.com/r2/default/images/1778424715547-085d3c3b-9603-4de7-b714-ae9c1f4022b8.jpg", category:"DryFish", darazLink:"https://www.daraz.lk/products/i277644577.html", rating:4.7 }
+  ];
+
+  // Render product cards
+  function renderProducts(containerId, productArray, limit=0) {
+    const container = document.getElementById(containerId);
+    if(!container) return;
+    let items = limit ? productArray.slice(0,limit) : productArray;
+    container.innerHTML = items.map(p => `
+      <div class="product-card">
+        <img class="product-img" src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="product-info">
+          <div class="product-title">${p.name}</div>
+          <div class="product-desc">${p.desc}</div>
+          <div class="rating">${'★'.repeat(Math.floor(p.rating))}${p.rating%1>=0.5?'½':''} (${p.rating})</div>
+          <button class="daraz-btn" onclick="window.open('${p.darazLink}','_blank')"><i class="fab fa-daraz"></i> Buy on Daraz</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Featured (first 4)
+  renderProducts("featuredGrid", products.slice(0,4));
+  renderProducts("productsGrid", products);
+  renderProducts("darazProductList", products);
+
+  // Filter & search
+  let currentCategory = "All";
+  const categorySet = ["All", ...new Set(products.map(p=>p.category))];
+  const filterDiv = document.getElementById("categoryFilters");
+  if(filterDiv){
+    filterDiv.innerHTML = categorySet.map(cat => `<button class="filter-btn ${cat==='All'?'active-filter':''}" data-cat="${cat}">${cat}</button>`).join('');
+    document.querySelectorAll("[data-cat]").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        currentCategory = btn.getAttribute("data-cat");
+        document.querySelectorAll("[data-cat]").forEach(b=>b.classList.remove("active-filter"));
+        btn.classList.add("active-filter");
+        applyProductFilter();
+      });
+    });
+  }
+  function applyProductFilter(){
+    const searchTerm = document.getElementById("searchInput")?.value.toLowerCase() || "";
+    let filtered = products.filter(p=> (currentCategory==="All" || p.category===currentCategory) && p.name.toLowerCase().includes(searchTerm));
+    renderProducts("productsGrid", filtered);
+  }
+  if(document.getElementById("searchInput")) document.getElementById("searchInput").addEventListener("input", applyProductFilter);
+
+  // Recipes data
+  const recipes = [
+    { name:"Maldive Fish Sambol", time:"10min", difficulty:"Easy", desc:"Roast umbalakada, mix with onion, chili, coconut", img:"https://www.image2url.com/r2/default/images/1778423469987-cdc55595-248c-4902-a1c9-9727bd388ecb.png", link:"https://www.daraz.lk/products/i747829224.html" },
+    { name:"Traditional Dry Fish Curry", time:"35min", difficulty:"Medium", desc:"Simmer dried fish with coconut milk, spices & curry leaves", img:"https://www.image2url.com/r2/default/images/1778420251521-b2684ddd-dd98-4f7f-836b-4b3c57191cfc.png", link:"https://www.daraz.lk/products/i1754646075.html" },
+    { name:"Seeni Sambol Seafood Melt", time:"20min", difficulty:"Easy", desc:"Caramelized onion, dried squid & Maldive fish", img:"https://www.image2url.com/r2/default/images/1778423117325-b9c881ac-cd88-4b34-9cf1-8f8119c0bf12.jpg", link:"https://www.daraz.lk/products/i749667950.html" }
+  ];
+  const recipeGrid = document.getElementById("recipeGrid");
+  if(recipeGrid){
+    recipeGrid.innerHTML = recipes.map(r => `<div class="product-card"><img class="product-img" src="${r.img}"><div class="product-info"><h3>${r.name}</h3><p>⏱️ ${r.time} • ${r.difficulty}</p><p>${r.desc}</p><button class="daraz-btn" onclick="window.open('${r.link}','_blank')">Get Ingredients</button></div></div>`).join('');
+  }
+
+  // Multi-language (key strings) + AI translation vibe
+  const translations = {
+    en: { hero_title:"Premium Ocean Flavors", featured_head:"Featured Treasures", about_title:"Our Heritage", products_main:"Our Premium Collection", contact_title:"Contact Us" },
+    si: { hero_title:"ප්‍රිමියම් සාගර රස", featured_head:"විශේෂ නිෂ්පාදන", about_title:"අපගේ උරුමය", products_main:"අපගේ ප්‍රිමියම් එකතුව", contact_title:"අප අමතන්න" },
+    ta: { hero_title:"பிரீமியம் கடல் சுவைகள்", featured_head:"சிறப்புப் பொருட்கள்", about_title:"எங்கள் மரபு", products_main:"எங்கள் பிரீமியம் தொகுப்பு", contact_title:"தொடர்பு கொள்ள" }
+  };
+  let currentLang = "en";
+  function applyLanguage(lang){
+    currentLang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if(translations[lang][key]) el.innerText = translations[lang][key];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+      const key = el.getAttribute("data-i18n-placeholder");
+      if(translations[lang][key]) el.placeholder = translations[lang][key];
+    });
+  }
+  document.querySelectorAll(".lang-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const l = btn.getAttribute("data-lang");
+      applyLanguage(l);
+      document.querySelectorAll(".lang-btn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+  applyLanguage("en");
+
+  // Page navigation + mobile menu
+  const pages = ["home","about","products","recipes","video","darazshop","blog","contact"];
+  function showPage(pageId){
+    pages.forEach(p => { document.getElementById(p).classList.remove("active-page"); });
+    document.getElementById(pageId).classList.add("active-page");
+    document.querySelectorAll(".nav-links a").forEach(a=>{ if(a.getAttribute("data-page")===pageId) a.classList.add("active-page"); else a.classList.remove("active-page"); });
+  }
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", (e) => { e.preventDefault(); const page = link.getAttribute("data-page"); if(page) showPage(page); });
+  });
+  document.getElementById("mobileMenuBtn")?.addEventListener("click",()=>{ document.getElementById("navLinks").classList.toggle("show"); });
+
+  // chatbot AI suggestions
+  const chatMessages = document.getElementById("chatMessages");
+  const chatInput = document.getElementById("chatInput");
+  function addBotMessage(msg){ let div=document.createElement("div"); div.innerHTML=`<strong>🤖:</strong> ${msg}`; chatMessages.appendChild(div); chatMessages.scrollTop=chatMessages.scrollHeight; }
+  function handleUserMessage(msg){
+    let text=msg.toLowerCase();
+    if(text.includes("product")||text.includes("buy")) addBotMessage("Explore our premium range on Daraz: https://www.daraz.lk/shop/drybea-market- . Best sellers: Maldive chips & Jadi!");
+    else if(text.includes("recipe")) addBotMessage("Try our Maldive Fish Sambol: mix chips with coconut, onion & chili! Full recipes on our Recipe page.");
+    else if(text.includes("delivery")||text.includes("shipping")) addBotMessage("We deliver island-wide via Daraz logistics. COD & card available!");
+    else if(text.includes("price")) addBotMessage("Check product cards for Daraz prices & exclusive bundles.");
+    else addBotMessage("Thank you for reaching out! Visit our Daraz shop or contact WhatsApp +94711171172 for bulk orders.");
+  }
+  document.getElementById("chatSend")?.addEventListener("click",()=>{ let q = chatInput.value.trim(); if(q){ addBotMessage(`You: ${q}`); handleUserMessage(q); chatInput.value=""; } });
+  document.getElementById("chatToggle")?.addEventListener("click",()=>{ let w=document.getElementById("chatWindow"); w.style.display = w.style.display==="flex"?"none":"flex"; });
+  document.getElementById("contactForm")?.addEventListener("submit",(e)=>{ e.preventDefault(); alert("Thank you! DRYBEA team will reply within 24hrs."); e.target.reset(); });
+</script>
+</body>
+</html>
